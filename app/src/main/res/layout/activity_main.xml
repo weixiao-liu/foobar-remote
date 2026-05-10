@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0f0c29">
+
+    <!-- WebView 全屏 -->
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- 语音按钮（浮动在右下角） -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/micFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
+        android:contentDescription="@string/mic_desc"
+        android:src="@android:drawable/ic_btn_speak_now"
+        app:backgroundTint="#667eea"
+        app:tint="#ffffff"
+        app:borderWidth="0dp"
+        app:elevation="8dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto" />
+
+    <!-- 语音状态提示 -->
+    <TextView
+        android:id="@+id/voiceStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="32dp"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:background="#80000000"
+        android:padding="8dp"
+        android:visibility="gone" />
+
+</FrameLayout>
