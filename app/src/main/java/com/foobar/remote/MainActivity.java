@@ -15,7 +15,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.FloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         initMicButton();
     }
 
-    /* ——— WebView ——— */
+    /* WebView init */
     private void initWebView() {
         webView = findViewById(R.id.webView);
         WebSettings ws = webView.getSettings();
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         webView.loadUrl(PLAYER_URL);
     }
 
-    /* ——— 璇锋眰璇嗗浘鏉冮檺 ——— */
+    /* Request mic permission */
     private void initVoice() {
         if (!SpeechRecognizer.isRecognitionAvailable(this)) {
             Toast.makeText(this, "Device not support speech recognition", Toast.LENGTH_LONG).show();
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /* ——— 璇峰崱鎸夐挳 ——— */
+    /* Mic button init */
     private void initMicButton() {
         micFab = findViewById(R.id.micFab);
         voiceStatus = findViewById(R.id.voiceStatus);
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /* ———寮€濮嬬洃鍚?*/
+    /* Start listening */
     private void startListening() {
         if (recognizer != null) {
             recognizer.destroy();
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         recognizer.startListening(intent);
     }
 
-    /* ———鍋滄瘮杩旇浇—*/
+    /* Stop listening */
     private void stopListening() {
         if (recognizer != null) {
             recognizer.stopListening();
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         voiceStatus.setVisibility(View.GONE);
     }
 
-    /* ———澶勭悊璇嗗浘鎸囦护 ——— */
+    /* Handle voice commands */
     private void handleVoiceCommand(String cmd) {
         String c = cmd.replaceAll("\\s+", "");
         Log.d(TAG, "Command: " + c);
@@ -168,19 +168,19 @@ public class MainActivity extends AppCompatActivity {
         if (c.contains("鎾绘敹") || c.contains("鎾愭敹")) {
             injectJS("document.getElementById('playBtn').click();", "Play");
         }
-        else if (c.contains("鏆傚仠") || c.contains("鍋滄"):
+        else if (c.contains("鏆傚仠") || c.contains("鍋滄")) {
             injectJS("document.getElementById('playBtn').click();", "Pause");
         }
-        else if (c.contains("澶уソ") || c.contains("澶т竴鐐") || c.contains("闊抽噺澧?) || c.contains("澹伴煶澶") || c.contains("闊抽噺澧炲姞")) {
+        else if (c.contains("澶уソ") || c.contains("澶т竴鐐") || c.contains("闊抽噺澧) || c.contains("闊抽噺澧炲姞")) {
             injectVolumeJS(true);
         }
-        else if (c.contains("灏忓ソ") || c.contains("灏忎竴鐐") || c.contains("闊抽噺灏?) || c.contains("澹伴煶灏?) || c.contains("闊抽噺鍑忓皯")) {
+        else if (c.contains("灏忓ソ") || c.contains("灏忎竴鐐") || c.contains("闊抽噺灏) || c.contains("闊抽噺鍑忓皯")) {
             injectVolumeJS(false);
         }
-        else if (c.contains("涓婁竴鏇?) || c.contains("涓婁竴棣?) || c.contains("涓婃洸")) {
+        else if (c.contains("涓婁竴鏇) || c.contains("涓婁竴棣) || c.contains("涓婃洸")) {
             injectJS("document.getElementById('prevBtn').click();", "Prev");
         }
-        else if (c.contains("涓嬩竴鏇?) || c.contains("涓嬩竴棣?) || c.contains("涓嬫洸")) {
+        else if (c.contains("涓嬩竴鏇) || c.contains("涓嬩竴棣) || c.contains("涓嬫洸")) {
             injectJS("document.getElementById('nextBtn').click();", "Next");
         }
         else {
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /* ———娉ㄥ叆JS鎵цă钮鐐瑰幓 ——— */
+    /* Inject JS to click button */
     private void injectJS(String js, String action) {
         runOnUiThread(() -> {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /* ———闊抽噺璋冭妭JS ——— */
+    /* Volume adjust JS */
     private void injectVolumeJS(boolean up) {
         String js = "(function() {" +
                 "  var s = document.getElementById('volSlider');" +
@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /* ———鐘舵€佹彁绀?—*/
+    /* Show status */
     private void showStatus(String text) {
         runOnUiThread(() -> {
             voiceStatus.setText(text);
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /* ———鏉冮檺鍥炶皟 ——— */
+    /* Permission callback */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /* ———杩斿洖閿鏃ф帶鍒禤ebView ——— */
+    /* Back button controls WebView */
     @Override
     public void onBackPressed() {
         if (webView.canGoBack()) {
