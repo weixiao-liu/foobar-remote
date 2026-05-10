@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Foobar Remote</string>
+    <string name="mic_desc">语音控制</string>
+    <string name="listening">正在听…</string>
+    <string name="voice_play">播放</string>
+    <string name="voice_pause">暂停</string>
+    <string name="voice_up">音量+</string>
+    <string name="voice_down">音量-</string>
+    <string name="voice_prev">上一曲</string>
+    <string name="voice_next">下一曲</string>
+    <string name="voice_unknown">未识别</string>
+    <string name="no_speech">没有听到语音</string>
+</resources>
